@@ -117,6 +117,10 @@ module.exports = class SelectListView {
       this.props.loadingMessage = props.loadingMessage
     }
 
+    if (props.hasOwnProperty('apmMessage')) {
+      this.props.apmMessage = props.apmMessage
+    }
+
     if (props.hasOwnProperty('loadingBadge')) {
       this.props.loadingBadge = props.loadingBadge
     }
@@ -296,7 +300,12 @@ module.exports = class SelectListView {
 
   confirmSelection () {
     const selectedItem = this.getSelectedItem()
-    if (selectedItem) {
+    if (this.getQuery().startsWith('apm')) {
+      // TODO move into else statement? (selection is always empty on query start with 'apm' -> renderItems() handles this)
+      if (this.props.didConfirmApmCommand) {
+        this.props.didConfirmApmCommand(this.getQuery())
+      }
+    } if (selectedItem) {
       if (this.props.didConfirmSelection) {
         this.props.didConfirmSelection(selectedItem)
       }

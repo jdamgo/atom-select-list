@@ -306,14 +306,13 @@ module.exports = class SelectListView {
 
   confirmSelection () {
     const selectedItem = this.getSelectedItem()
-    if (this.getQuery().startsWith('apm')) {
-      // TODO move into else statement? (selection is always empty on query start with 'apm' -> renderItems() handles this)
-      if (this.props.didConfirmApmCommand) {
-        this.props.didConfirmApmCommand(this.getQuery())
-      }
-    } if (selectedItem) {
+    if (selectedItem) {
       if (this.props.didConfirmSelection) {
         this.props.didConfirmSelection(selectedItem)
+      }
+    } else if (this.getQuery().startsWith('apm')) {
+      if (this.props.didConfirmApmCommand) {
+        this.props.didConfirmApmCommand(this.getQuery())
       }
     } else {
       if (this.props.didConfirmEmptySelection) {

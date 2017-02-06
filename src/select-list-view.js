@@ -149,7 +149,13 @@ module.exports = class SelectListView {
   }
 
   renderItems () {
-    if (this.items.length > 0) {
+    const query = this.getQuery()
+    // NOTE Performance test for chosen query check: http://jsben.ch/#/uhhWM
+    if(query[0] === 'a' && query.startsWith('pm', 1)) {
+      return (
+        <span ref="apmMessage">{this.props.apmMessage}</span>
+      )
+    } else if (this.items.length > 0) {
       const className = ['list-group'].concat(this.props.itemsClassList || []).join(' ')
       return (
         <ol className={className} ref='items'>

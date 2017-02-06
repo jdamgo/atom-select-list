@@ -151,7 +151,7 @@ module.exports = class SelectListView {
   renderItems () {
     const query = this.getQuery()
     // NOTE Performance test for chosen query check: http://jsben.ch/#/uhhWM
-    if(query[0] === 'a' && query.startsWith('pm', 1)) {
+    if(query[0] === 'a' && query.startsWith('pm ', 1)) {
       return (
         <span ref="apmMessage">{this.props.apmMessage}</span>
       )
